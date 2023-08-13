@@ -33,6 +33,7 @@ class UserServiceImplTest {
     private UserRepository repository;
     @Mock
     private UserMapper mapper;
+
     private final String userName = "aaa@ug.ru";
     private final String password = "123456789";
     private final Role role = Role.USER;
@@ -74,7 +75,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    void getValidUsername() {
+    void getValidUsernameTest() {
         UserEntity entity = getEntity();
         User user = new User(id, userName, fName, lName, phone, imagePath);
         when(repository.findByEmail(userName)).thenReturn(Optional.of(entity));
@@ -83,7 +84,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    void getInvalidUsername() {
+    void getInvalidUsernameTest() {
         when(repository.findByEmail(userName)).thenReturn(Optional.empty());
         assertThrows(FindNoEntityException.class, () -> userService.get(userName));
     }
@@ -105,14 +106,14 @@ class UserServiceImplTest {
     }
 
     @Test
-    void getEntityByValidId() {
+    void getEntityByValidIdTest() {
         UserEntity entity = getEntity();
         when(repository.findById(id)).thenReturn(Optional.of(entity));
         assertEquals(entity, userService.getEntityById(id));
     }
 
     @Test
-    void getEntityByInvalidId() {
+    void getEntityByInvalidIdTest() {
         when(repository.findById(id)).thenReturn(Optional.empty());
         assertThrows(FindNoEntityException.class, () -> userService.getEntityById(id));
     }
@@ -128,13 +129,13 @@ class UserServiceImplTest {
     }
 
     @Test
-    void userExistsTrue() {
+    void userExistsTrueTest() {
         when(repository.findByEmail(userName)).thenReturn(Optional.of(getEntity()));
         Assertions.assertTrue(userService.userExists(userName));
     }
 
     @Test
-    void userExistsFalse() {
+    void userExistsFalseTest() {
         when(repository.findByEmail(userName)).thenReturn(Optional.empty());
         Assertions.assertFalse(userService.userExists(userName));
     }
@@ -150,5 +151,4 @@ class UserServiceImplTest {
     private UserEntity getEntity() {
         return new UserEntity(id, password, userName, fName, lName, phone, role, new ImageEntity(23));
     }
-
 }
