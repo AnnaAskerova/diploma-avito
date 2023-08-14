@@ -11,7 +11,16 @@ import java.util.Optional;
  */
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+    /**
+     * Возвращает Optional с объектом UserEntity, найденнным по логину в БД
+     * @param email логин пользователя
+     * @return Optional<UserEntity>
+     */
     Optional<UserEntity> findByEmail(String email);
 
+    /**
+     * Удаляет пользователя по логину
+     * @param email логин пользователя
+     */
     void deleteByEmail(String email);
 }

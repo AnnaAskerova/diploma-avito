@@ -11,5 +11,10 @@ import java.util.List;
  */
 @Repository
 public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
+    /**
+     * Возвращает все комментарии к объявлению по его id
+     * @param id id объявления
+     * @return коллекция комментариев
+     */
     List<CommentEntity> findAllByAd_Pk(int id);
 }

@@ -10,5 +10,10 @@ import java.util.List;
  */
 @Repository
 public interface AdRepository extends JpaRepository<AdEntity, Integer> {
+    /**
+     * Возвращает все объявления автора по его логину
+     * @param email логин автора
+     * @return коллекция объявлений автора
+     */
     List<AdEntity> findAllByAuthorEmail(String email);
 }
